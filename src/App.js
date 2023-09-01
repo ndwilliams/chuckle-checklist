@@ -97,8 +97,8 @@ export const App = () => {
                 <div>
                   <button
                     className="joke-list-action-toggle"
-                    onClick={async () => {
-                      await editAndPutJoke(joke);
+                    onClick={() => {
+                      editAndPutJoke(joke);
                     }}
                   >
                     <i className="fa-solid fa-face-grin-tears" />
@@ -130,9 +130,7 @@ export const App = () => {
                 <div>
                   <button
                     className="joke-list-action-toggle"
-                    onClick={async () => {
-                      await editAndPutJoke(joke);
-                    }}
+                    onClick={() => editAndPutJoke(joke)}
                   >
                     <i className="fa-solid fa-face-grimace" />
                   </button>
