@@ -13,3 +13,8 @@ export const postNewJoke = async (newJoke) => {
 	}
 	await fetch(`http://localhost:8088/jokes`, postOptions)
 }
+
+export const getAllJokes = async () => {
+	const response = await fetch(`http://localhost:8088/jokes`)
+	return response.json()
+}
