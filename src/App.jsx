@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import stevePic from "./assets/steve.png"
 import "./App.css"
-import { getAllJokes, postNewJoke } from "./services/jokeService"
+import { editJoke, getAllJokes, postNewJoke } from "./services/jokeService"
 
 export const App = () => {
 	const [newJoke, setNewJoke] = useState("")
@@ -32,13 +33,21 @@ export const App = () => {
 
 	const addNewJoke = () => {
 		if (newJoke) {
-			postNewJoke(newJoke).then(setNewJoke(""))
+			postNewJoke(newJoke).then(setNewJoke("")).then(getAndSetAllJokes)
 		}
+	}
+	const handleToggleJoke = async (joke) => {
+		joke.told = !joke.told
+		await editJoke(joke)
+		getAndSetAllJokes()
 	}
 
 	return (
 		<div className="app-container">
 			<div className="app-heading">
+				<div className="app-heading-circle">
+					<img className="app-logo" src={stevePic} alt="Good job Steve" />
+				</div>
 				<h1 className="app-heading-text">Chuckle Checklist</h1>
 			</div>
 			<h2>Add Joke</h2>
@@ -65,6 +74,13 @@ export const App = () => {
 						return (
 							<li className="joke-list-item" key={jokeObject.id}>
 								<p className="joke-list-item-text">{jokeObject.text}</p>
+								<button
+									className="joke-list-action-toggle"
+									onClick={async () => {
+										handleToggleJoke(jokeObject)
+									}}>
+									<i className="fa-regular fa-face-laugh-squint" />
+								</button>
 							</li>
 						)
 					})}
@@ -78,6 +94,13 @@ export const App = () => {
 						return (
 							<li className="joke-list-item" key={jokeObject.id}>
 								<p className="joke-list-item-text">{jokeObject.text}</p>
+								<button
+									className="joke-list-action-toggle"
+									onClick={async () => {
+										handleToggleJoke(jokeObject)
+									}}>
+									<i className="fa-regular fa-face-meh" />
+								</button>
 							</li>
 						)
 					})}
