@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react"
 import stevePic from "./assets/steve.png"
 import "./App.css"
-import { editJoke, getAllJokes, postNewJoke } from "./services/jokeService"
+import {
+	deleteJoke,
+	editJoke,
+	getAllJokes,
+	postNewJoke,
+} from "./services/jokeService"
 
 export const App = () => {
 	const [newJoke, setNewJoke] = useState("")
@@ -39,6 +44,11 @@ export const App = () => {
 	const handleToggleJoke = async (joke) => {
 		joke.told = !joke.told
 		await editJoke(joke)
+		getAndSetAllJokes()
+	}
+
+	const handleDeleteJoke = async (joke) => {
+		await deleteJoke(joke)
 		getAndSetAllJokes()
 	}
 
@@ -81,6 +91,13 @@ export const App = () => {
 									}}>
 									<i className="fa-regular fa-face-laugh-squint" />
 								</button>
+								<button
+									className="joke-list-action-delete"
+									onClick={async () => {
+										handleDeleteJoke(jokeObject)
+									}}>
+									<i className="fa-solid fa-trash"></i>
+								</button>
 							</li>
 						)
 					})}
@@ -100,6 +117,13 @@ export const App = () => {
 										handleToggleJoke(jokeObject)
 									}}>
 									<i className="fa-regular fa-face-meh" />
+								</button>
+								<button
+									className="joke-list-action-delete"
+									onClick={async () => {
+										handleDeleteJoke(jokeObject)
+									}}>
+									<i className="fa-solid fa-trash"></i>
 								</button>
 							</li>
 						)
