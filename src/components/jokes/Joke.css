@@ -1,0 +1,18 @@
+/** Class for an individual <li>*/
+.joke-list-item {
+	border: none;
+	border-bottom: 1px solid hsla(0, 0%, 50%, 0.5);
+	margin: 5px 0;
+	padding: 5px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	/** Class for the joke text. Add it to a <p> element*/
+	.joke-list-item-text {
+		margin: 0;
+		font-size: 0.7rem;
+		flex-basis: 75%;
+	}
+}
